@@ -1,60 +1,82 @@
+import com.ntd.operation.OperationTypeEnum;
 import com.ntd.operationservice.OperationFactoryImpl;
 import com.ntd.operationservice.OperationService;
+import com.ntd.operationservice.strategy.AdditionOperationService;
+import com.ntd.operationservice.strategy.DivisionOperationService;
+import com.ntd.operationservice.strategy.MultiplyOperationService;
+import com.ntd.operationservice.strategy.RandomStringOperationService;
+import com.ntd.operationservice.strategy.SquareRootOperationService;
+import com.ntd.operationservice.strategy.SubtractionOperationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OperationFactoryImplTest {
+    @Mock
+    private AdditionOperationService additionOperationService;
+    @Mock
+    private DivisionOperationService divisionOperationService;
+    @Mock
+    private MultiplyOperationService multiplyOperationService;
+    @Mock
+    private RandomStringOperationService randomStringOperationService;
+    @Mock
+    private SquareRootOperationService squareRootOperationService;
+    @Mock
+    private SubtractionOperationService subtractionOperationService;
 
-    private final OperationFactoryImpl operationFactory = new OperationFactoryImpl();
+    private OperationFactoryImpl operationFactory;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        operationFactory = new OperationFactoryImpl(additionOperationService, divisionOperationService, multiplyOperationService, randomStringOperationService, squareRootOperationService, subtractionOperationService);
     }
 
     @Test
     void should_return_addition_operation() {
-        OperationService result = operationFactory.getInstance("ADDITION");
+        OperationService result = operationFactory.getInstance(OperationTypeEnum.ADDITION.name());
 
-        assertEquals(result instanceof AdditionOperationImpl);
+        assertTrue(result instanceof AdditionOperationService);
     }
 
     @Test
     void should_return_subtraction_operation() {
-        OperationService result = operationFactory.getInstance("SUBTRACTION");
+        OperationService result = operationFactory.getInstance(OperationTypeEnum.SUBTRACTION.name());
 
-        assertEquals(result instanceof SubtractionOperationImpl);
+        assertTrue(result instanceof SubtractionOperationService);
     }
 
     @Test
     void should_return_multiply_operation() {
-        OperationService result = operationFactory.getInstance("MULTIPLY");
+        OperationService result = operationFactory.getInstance(OperationTypeEnum.MULTIPLY.name());
 
-        assertEquals(result instanceof MultiplyOperationImpl);
+        assertTrue(result instanceof MultiplyOperationService);
     }
 
     @Test
     void should_return_division_operation() {
-        OperationService result = operationFactory.getInstance("DIVISION");
+        OperationService result = operationFactory.getInstance(OperationTypeEnum.DIVISION.name());
 
-        assertEquals(result instanceof DivisionOperationImpl);
+        assertTrue(result instanceof DivisionOperationService);
     }
 
     @Test
     void should_return_square_root_operation() {
-        OperationService result = operationFactory.getInstance("SQUARE_ROOT");
+        OperationService result = operationFactory.getInstance(OperationTypeEnum.SQUARE_ROOT.name());
 
-        assertEquals(result instanceof SquareRootOperationImpl);
+        assertTrue(result instanceof SquareRootOperationService);
     }
 
     @Test
     void should_return_random_string_operation() {
-        OperationService result = operationFactory.getInstance("RANDOM_STRING");
+        OperationService result = operationFactory.getInstance(OperationTypeEnum.RANDOM_STRING.name());
 
-        assertEquals(result instanceof RandomStringOperationImpl);
+        assertTrue(result instanceof RandomStringOperationService);
     }
 
     @Test

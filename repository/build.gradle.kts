@@ -11,6 +11,7 @@ repositories {
 }
 dependencies {
     implementation(project(mapOf("path" to ":output-boundary")))
+    implementation(project(mapOf("path" to ":entities")))
     runtimeOnly("org.postgresql:postgresql:42.6.0")
     implementation("org.springframework.boot:spring-boot-starter-jdbc:3.2.4")
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")

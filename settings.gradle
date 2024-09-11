@@ -7,4 +7,5 @@ include 'web'
 include 'usecase'
 include 'random-org'
 include 'configuration'
+include 'entities'
 
