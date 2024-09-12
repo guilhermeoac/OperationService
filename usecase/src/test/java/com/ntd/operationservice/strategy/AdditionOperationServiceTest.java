@@ -37,34 +37,34 @@ class AdditionOperationServiceTest {
     void should_execute_sum_negative_correct() {
         var response = additionOperationService.execute("-1.2", "2.2");
 
-        assertEquals(response.result(), "1");
+        assertEquals(response.result(), "1.0");
     }
 
     @Test
     void should_throw_exception_when_first_parameter_is_null() {
         var exception = assertThrows(ApplicationException.class, () -> additionOperationService.execute(null, "2.2"));
 
-        assertEquals(exception.getCode(), "first.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 
     @Test
     void should_throw_exception_when_first_parameter_is_word() {
         var exception = assertThrows(ApplicationException.class, () -> additionOperationService.execute("asda", "2.2"));
 
-        assertEquals(exception.getCode(), "first.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 
     @Test
     void should_throw_exception_when_second_parameter_is_null() {
         var exception = assertThrows(ApplicationException.class, () -> additionOperationService.execute("1", null));
 
-        assertEquals(exception.getCode(), "second.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 
     @Test
     void should_throw_exception_when_second_parameter_is_word() {
         var exception = assertThrows(ApplicationException.class, () -> additionOperationService.execute("1", "2.1as2"));
 
-        assertEquals(exception.getCode(), "second.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 }

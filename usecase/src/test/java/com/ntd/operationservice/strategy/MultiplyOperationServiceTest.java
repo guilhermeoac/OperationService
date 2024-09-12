@@ -44,27 +44,27 @@ class MultiplyOperationServiceTest {
     void should_throw_exception_when_first_parameter_is_null() {
         var exception = assertThrows(ApplicationException.class, () -> multiplyOperationService.execute(null, "2.2"));
 
-        assertEquals(exception.getCode(), "first.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 
     @Test
     void should_throw_exception_when_first_parameter_is_word() {
         var exception = assertThrows(ApplicationException.class, () -> multiplyOperationService.execute("asda", "2.2"));
 
-        assertEquals(exception.getCode(), "first.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 
     @Test
     void should_throw_exception_when_second_parameter_is_null() {
         var exception = assertThrows(ApplicationException.class, () -> multiplyOperationService.execute("1", null));
 
-        assertEquals(exception.getCode(), "second.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 
     @Test
     void should_throw_exception_when_second_parameter_is_word() {
         var exception = assertThrows(ApplicationException.class, () -> multiplyOperationService.execute("1", "2.1as2"));
 
-        assertEquals(exception.getCode(), "second.param.invalid");
+        assertEquals(exception.getCode(), "invalid.parameter");
     }
 }
