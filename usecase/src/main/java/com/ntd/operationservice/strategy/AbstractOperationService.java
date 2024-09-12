@@ -7,7 +7,7 @@ import com.ntd.operationservice.dto.OperationResultDTO;
 public abstract class AbstractOperationService implements OperationService {
 
     @Override
-    public abstract OperationResultDTO execute(String type, String firstParam, String secondParam);
+    public abstract OperationResultDTO execute(String firstParam, String secondParam);
 
     @Override
     public OperationDTO getOperationInfo(String type) {
