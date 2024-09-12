@@ -4,7 +4,9 @@ import com.ntd.operationservice.dto.OperationResultDTO;
 import com.ntd.operationservice.exception.ApplicationException;
 import java.math.RoundingMode;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DivisionOperationService extends AbstractOperationService{
     @Override
     public OperationResultDTO execute(String firstParam, String secondParam) {

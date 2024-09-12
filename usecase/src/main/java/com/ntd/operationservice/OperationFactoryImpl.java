@@ -9,7 +9,9 @@ import com.ntd.operationservice.strategy.RandomStringOperationService;
 import com.ntd.operationservice.strategy.SquareRootOperationService;
 import com.ntd.operationservice.strategy.SubtractionOperationService;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OperationFactoryImpl implements OperationsFactory{
 
     private final AdditionOperationService additionOperationService;
