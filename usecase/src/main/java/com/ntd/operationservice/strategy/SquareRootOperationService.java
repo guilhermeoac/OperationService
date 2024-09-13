@@ -1,5 +1,6 @@
 package com.ntd.operationservice.strategy;
 
+import com.ntd.operationservice.OperationRepository;
 import com.ntd.operationservice.dto.OperationResultDTO;
 import com.ntd.operationservice.exception.ApplicationException;
 import java.math.MathContext;
@@ -9,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SquareRootOperationService extends AbstractOperationService{
+    public SquareRootOperationService(OperationRepository operationRepository) {
+        super(operationRepository);
+    }
+
     @Override
     public OperationResultDTO execute(String firstParam, String secondParam) {
         try {

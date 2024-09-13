@@ -1,8 +1,11 @@
 package com.ntd.operationservice.strategy;
 
+import com.ntd.operationservice.OperationRepository;
 import com.ntd.operationservice.exception.ApplicationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,13 +13,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AdditionOperationServiceTest {
 
+    @Mock
+    private OperationRepository operationRepository;
+
+    @InjectMocks
     private AdditionOperationService additionOperationService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        additionOperationService = new AdditionOperationService();
     }
 
     @Test

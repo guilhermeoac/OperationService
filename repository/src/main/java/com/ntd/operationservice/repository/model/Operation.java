@@ -3,6 +3,8 @@ package com.ntd.operationservice.repository.model;
 import com.ntd.operation.OperationTypeEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,13 +13,14 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "tb_operation")
+@Table(name = "tb_operation", schema = "operation")
 public class Operation {
     @Id
     @SequenceGenerator(name = "tb_operation_id_seq", sequenceName = "tb_operation_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_operation_id_seq")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private OperationTypeEnum type;
     @Column(name = "cost", nullable = false)

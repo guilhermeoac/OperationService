@@ -1,9 +1,11 @@
 import com.ntd.operation.OperationTypeEnum;
 import com.ntd.operationservice.OperationFactoryImpl;
+import com.ntd.operationservice.OperationRepository;
 import com.ntd.operationservice.OperationService;
 import com.ntd.operationservice.exception.ApplicationException;
 import com.ntd.operationservice.strategy.AdditionOperationService;
 import com.ntd.operationservice.strategy.DivisionOperationService;
+import com.ntd.operationservice.strategy.GeneralOperationService;
 import com.ntd.operationservice.strategy.MultiplyOperationService;
 import com.ntd.operationservice.strategy.RandomStringOperationService;
 import com.ntd.operationservice.strategy.SquareRootOperationService;
@@ -31,12 +33,16 @@ class OperationFactoryImplTest {
     @Mock
     private SubtractionOperationService subtractionOperationService;
 
+    @Mock
+    private OperationRepository operationRepository;
+    private GeneralOperationService generalOperationService = new GeneralOperationService(operationRepository);
+
     private OperationFactoryImpl operationFactory;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        operationFactory = new OperationFactoryImpl(additionOperationService, divisionOperationService, multiplyOperationService, randomStringOperationService, squareRootOperationService, subtractionOperationService);
+        operationFactory = new OperationFactoryImpl(additionOperationService, divisionOperationService, multiplyOperationService, randomStringOperationService, squareRootOperationService, subtractionOperationService, generalOperationService);
     }
 
     @Test
@@ -83,14 +89,14 @@ class OperationFactoryImplTest {
 
     @Test
     void should_return_error_to_operation_null() {
-        var exception = assertThrows(ApplicationException.class, () -> operationFactory.getInstance(null));
+        var exception = assertThrows(ApplicationException.class, () -> operationFactory.getInstance(null).execute("", ""));
 
         assertEquals(exception.getCode(), "operation.not.register");
     }
 
     @Test
     void should_return_error_to_operation_not_implemented() {
-        var exception = assertThrows(ApplicationException.class, () -> operationFactory.getInstance("DERIVATIVE"));
+        var exception = assertThrows(ApplicationException.class, () -> operationFactory.getInstance("DERIVATIVE").execute("", ""));
 
         assertEquals(exception.getCode(), "operation.not.register");
     }
