@@ -29,7 +29,7 @@ public class OperationController {
     public ResponseEntity<OperationResultDTO> executeOperation(
             @RequestHeader("type") String type,
             @RequestBody OperationParamsDTO body
-            ) {
+            ) throws Exception {
         return ResponseEntity.ok(operationsFactory.getInstance(type).execute(body.firstParam(), body.secondParam()));
     }
     @GetMapping("/type")

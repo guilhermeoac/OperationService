@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OperationService {
 
-    OperationResultDTO execute(String firstParam, String secondParam);
+    OperationResultDTO execute(String firstParam, String secondParam) throws Exception;
 
     OperationDTO getOperationInfo(String type) throws Exception;
     List<OperationDTO> getOperations() throws Exception;
