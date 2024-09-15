@@ -23,9 +23,6 @@ public abstract class AbstractOperationService implements OperationService {
     }
 
     @Override
-    public abstract OperationResultDTO execute(String firstParam, String secondParam);
-
-    @Override
     public OperationDTO getOperationInfo(String type) throws Exception {
         return operationRepository.findByType(type).map(it -> new OperationDTO(it.type(), it.cost())).orElse(null);
     }
@@ -39,7 +36,7 @@ public abstract class AbstractOperationService implements OperationService {
             return new BigDecimal(parameter);
         } catch (Exception e) {
             logger.error("AbstractOperationService.convertParameter, message:" + e.getMessage(), e);
-            throw new ApplicationException("invalid.parameter", "Invalid parameter!", HttpStatus.BAD_REQUEST);
+            throw new ApplicationException("invalid.parameter", "Invalid parameter!", HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

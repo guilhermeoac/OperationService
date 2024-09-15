@@ -19,7 +19,7 @@ public class DivisionOperationService extends AbstractOperationService{
             return new OperationResultDTO(convertParameter(firstParam).setScale(5, RoundingMode.HALF_UP).divide(convertParameter(secondParam), RoundingMode.HALF_UP).setScale(2, RoundingMode.HALF_UP).toString());
         } catch (ArithmeticException e) {
             logger.error("SquareRootOperationService.execute, ArithmeticException message:" + e.getMessage(), e);
-            throw new ApplicationException("invalid.operation.param", e.getMessage(), HttpStatus.BAD_REQUEST);
+            throw new ApplicationException("invalid.operation.param", e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         } catch (Exception e) {
             logger.error("DivisionOperationService.execute, message:" + e.getMessage(), e);
             throw e;

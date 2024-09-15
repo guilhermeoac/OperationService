@@ -17,6 +17,6 @@ public class GeneralOperationService extends AbstractOperationService {
 
     @Override
     public OperationResultDTO execute(String firstParam, String secondParam) {
-        throw new ApplicationException("operation.not.register", "Operation is not registered!", HttpStatus.BAD_REQUEST);
+        throw new ApplicationException("operation.not.register", "Operation is not registered!", HttpStatus.NOT_ACCEPTABLE);
     }
 }
