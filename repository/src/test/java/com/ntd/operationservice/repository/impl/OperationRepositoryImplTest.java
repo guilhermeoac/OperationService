@@ -47,36 +47,36 @@ class OperationRepositoryImplTest {
     @Test
     void testFindByType() throws Exception {
         var operation = new Operation(1L, OperationTypeEnum.ADDITION, new BigDecimal("100.00"));
-        when(operationsJpaRepository.findOperationByType(OperationTypeEnum.ADDITION.name())).thenReturn(List.of(operation));
+        when(operationsJpaRepository.findOperationByType(OperationTypeEnum.ADDITION)).thenReturn(List.of(operation));
 
         Optional<OperationOutputDTO> result = operationRepositoryImpl.findByType(OperationTypeEnum.ADDITION.name());
 
         assertTrue(result.isPresent());
         assertEquals(OperationTypeEnum.ADDITION.name(), result.get().type());
-        verify(operationsJpaRepository, times(1)).findOperationByType(OperationTypeEnum.ADDITION.name());
+        verify(operationsJpaRepository, times(1)).findOperationByType(OperationTypeEnum.ADDITION);
     }
 
     @Test
     void testFindByTypeEmpty() throws Exception {
-        when(operationsJpaRepository.findOperationByType(OperationTypeEnum.ADDITION.name())).thenReturn(List.of());
+        when(operationsJpaRepository.findOperationByType(OperationTypeEnum.ADDITION)).thenReturn(List.of());
 
         Optional<OperationOutputDTO> result = operationRepositoryImpl.findByType(OperationTypeEnum.ADDITION.name());
 
         assertTrue(result.isEmpty());
-        verify(operationsJpaRepository, times(1)).findOperationByType(OperationTypeEnum.ADDITION.name());
+        verify(operationsJpaRepository, times(1)).findOperationByType(OperationTypeEnum.ADDITION);
     }
 
     @Test
     void testFindByTypeMultipleItems() throws Exception {
         var operation1 = new Operation(1L, OperationTypeEnum.ADDITION, new BigDecimal("100.00"));
         var operation2 = new Operation(2L, OperationTypeEnum.ADDITION, new BigDecimal("200.00"));
-        when(operationsJpaRepository.findOperationByType(OperationTypeEnum.ADDITION.name())).thenReturn(List.of(operation1, operation2));
+        when(operationsJpaRepository.findOperationByType(OperationTypeEnum.ADDITION)).thenReturn(List.of(operation1, operation2));
 
         Optional<OperationOutputDTO> result = operationRepositoryImpl.findByType(OperationTypeEnum.ADDITION.name());
 
         assertTrue(result.isPresent());
         assertEquals(OperationTypeEnum.ADDITION.name(), result.get().type());
         assertEquals(1L, result.get().id());
-        verify(operationsJpaRepository, times(1)).findOperationByType(OperationTypeEnum.ADDITION.name());
+        verify(operationsJpaRepository, times(1)).findOperationByType(OperationTypeEnum.ADDITION);
     }
 }
